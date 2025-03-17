@@ -6,21 +6,37 @@ export default class ScrollAnima {
     this.animaScroll = this.animaScroll.bind(this);
   }
 
-
-  animaScroll() {
-    this.sections.forEach((section) => {
-      const sectionTop = section.getBoundingClientRect().top;
-      const isSectionVisible = (sectionTop - this.windowMetade) < 0;
-      if (isSectionVisible)
-        section.classList.add('ativo');
-      else if (section.classList.contains('ativo')) {
-        section.classList.remove('ativo');
-      }
+  getDistance() {
+    this.distance = [...this.sections].map((section) => {
+      const offset = section.offsetTop;
+      return {
+        element: section,
+        offset: Math.floor(offset - this.windowMetade),
+      };
     });
   }
 
+  checkDistance() {
+    this.distance.forEach((item) => {
+      if (window.pageYOffset > item.offset) {
+        section.classList.add('ativo');
+      } else if (item.element.section.classList.contains('ativo')) {
+        item.element.section.classList.remove('ativo');
+      }
+    })
+  }
+
   init() {
-    this.animaScroll();
-    window.addEventListener('scroll', this.animaScroll);
+    if (this.sections.length) {
+      this.getDistance();
+      this.checkDistance();
+      window.addEventListener('scroll', this.animaScroll);
+    }
+    return this;
+  }
+
+  // remove o event de scroll
+  stop() {
+    window.removeEventListener('scroll', this.animaScroll);
   }
 }
