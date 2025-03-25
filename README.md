@@ -50,5 +50,5 @@ Este projeto está sob a licença MIT - veja o arquivo LICENSE para mais detalhe
 
 ---
 
-Desenvolvido por [Seu Nome](https://github.com/techedevborges) ❤️
+Desenvolvido por [TedBorges](https://github.com/techedevborges) ❤️
 
